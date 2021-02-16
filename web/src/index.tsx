@@ -7,6 +7,7 @@ import { ApolloProvider, createHttpLink } from '@apollo/react-hooks';
 import { getAccessToken } from './pages/accessToken';
 import { setContext } from '@apollo/client/link/context'
 import { App } from './pages/App';
+import 'semantic-ui-css/semantic.min.css'
 
 
 

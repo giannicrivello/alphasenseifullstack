@@ -28,25 +28,18 @@ import cors from 'cors';
        if (!token) {
            return res.send({ ok: false, accessToken: ''})
        }
-      
        let payload: any = null;
        try {
            payload = verify(token, process.env.REFRESH_TOKEN_SECRET!)
-
        } catch(err) {
            console.log(err)
            return res.send({ ok: false, accessToken: ''})
-
        } 
-
        //token is valid and we can send back an accessToken
-
        const user = await User.findOne({ id: payload.userId})
-
        if (!user) {
            return res.send({ ok: false, accessToken: ''})
        }
-
        //given that we found a user, next line of code reads...
        //if user token version does not equal the user token version on the payload
        // give no accesstoken
@@ -62,10 +55,6 @@ import cors from 'cors';
        return res.send({ ok: true, accessToken: createAcccessToken(user) }); 
           
    });
-
-
-
-
     await createConnection();
 
 

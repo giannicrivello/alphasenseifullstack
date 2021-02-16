@@ -61,7 +61,6 @@ export class UserResolvers {
         if(!authorization) {
             throw null;
         }
-    
         try {
             const token = authorization.split(' ')[1]
             const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!)

@@ -8,6 +8,7 @@ import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { Bye } from './pages/Bye';
 import { Header } from './pages/Header';
+import TechNav from './pages/TechNav';
 
 
 
@@ -32,6 +33,7 @@ const Routes: React.FC = () => {
       <Route exact path='/login' component={Login} />
       //protected route
       <Route exact path='/bye' component={Bye}/>
+      <Route exact path='/technav' component={TechNav}/>
       //protected route
     </Switch>
     </BrowserRouter>
