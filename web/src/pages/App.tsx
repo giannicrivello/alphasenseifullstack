@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import Routes from '../Routes';
-import { setAcessToken } from './accessToken';
+import { accessToken, setAcessToken } from './accessToken';
+import { Login } from './Login';
 
 interface Props {
 
@@ -25,8 +27,17 @@ export const App: React.FC<Props> = () => {
     }, [])
     if (loading) {
         return <div>loading...</div>
+    } else if (!accessToken) {
+        return(
+         <div>
+             <BrowserRouter>
+                <Redirect to='/login' />
+                <Route exact path='/login' component={Login} />
+             </BrowserRouter>
+        </div>
+        )
     }
         return (
            <Routes />
         );
-}
+} 

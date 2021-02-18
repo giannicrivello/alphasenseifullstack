@@ -3,12 +3,11 @@ import React from 'react';
 import { gql } from 'apollo-boost'
 import { useHelloQuery, useTestingQuery } from './generated/graphql';
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import { Home } from './pages/Home';
+import MyHome  from './pages/MyHome';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { Bye } from './pages/Bye';
 import { Header } from './pages/Header';
-import TechNav from './pages/TechNav';
 
 
 
@@ -28,12 +27,11 @@ const Routes: React.FC = () => {
  
     </div>
     <Switch>
-      <Route exact path='/' component={Home}/>
+      <Route exact path='/' component={MyHome}/>
       <Route exact path='/register' component={Register}/>
       <Route exact path='/login' component={Login} />
       //protected route
       <Route exact path='/bye' component={Bye}/>
-      <Route exact path='/technav' component={TechNav}/>
       //protected route
     </Switch>
     </BrowserRouter>

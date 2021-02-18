@@ -47,12 +47,7 @@ export const Header: React.FC = () => {
         <Menu.Item
           name='sign-in'
         >
-          <Link to='/'>Home</Link>
-        </Menu.Item>
-        <Menu.Item
-          name='sign-in'
-        >
-          <Link to='/technav'>TechNav</Link>
+          <Link to='/'>My Techniques</Link>
         </Menu.Item>
         {!loading && data && data.me ? ( <button onClick={async () => {
           await logout();

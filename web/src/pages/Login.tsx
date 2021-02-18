@@ -8,11 +8,12 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [login] = useLoginMutation();
+    
 
 
     return (
         <Form onSubmit={async e => {
-            e.preventDefault()
+            
                 console.log('registration submitted');
                 const response = await login({
                     variables: {
@@ -41,9 +42,8 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
                 if (response && response.data) {
                     setAcessToken(response.data.login.accessToken);
                 }
-
-
-                history.push('/technav')
+                history.push('/')
+                window.location.reload()
 
             }}>
           <Form.Field>

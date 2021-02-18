@@ -97,7 +97,6 @@ export class UserResolvers {
         
     }
 
-
     //login Query
     @Mutation(() => LoginResponse)
     async login(
@@ -141,5 +140,6 @@ export class UserResolvers {
         });
         return true;
     }
+
     
 }

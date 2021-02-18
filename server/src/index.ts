@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import {ApolloServer} from 'apollo-server-express';
-import express from 'express';
 import { buildSchema } from "type-graphql";
 import {UserResolvers} from './UserResolvers';
 import { createConnection } from "typeorm";
@@ -11,6 +10,11 @@ import { createAcccessToken, createRefreshToken } from "./auth";
 import { User } from "./entity/User";
 import { sendRefreshToken } from "./sendRefreshToken";
 import cors from 'cors';
+import express from 'express';
+import { TechniqueResolver } from "./TechniqueResolver";
+// import { Technique } from "./entity/Techniques";
+
+
 
 (async () => {
     const app = express();
@@ -55,13 +59,28 @@ import cors from 'cors';
        return res.send({ ok: true, accessToken: createAcccessToken(user) }); 
           
    });
+
+//    app.post('/techniques', async (req: any, res: any) => {
+//        const {title, description, image} = req.body
+//        try {
+//            const technique = Technique.create({title, description, image})
+//            await technique.save()
+//            return res.json(technique)
+
+//        } catch(err) {
+//            console.log(err)
+//        }
+       
+
+//    })
+
     await createConnection();
 
 
     
     const apolloServer = new ApolloServer({
        schema: await buildSchema({
-            resolvers: [UserResolvers]
+            resolvers: [UserResolvers, TechniqueResolver]
         }),
         context: ({ req, res }) => ({ req, res })
     });

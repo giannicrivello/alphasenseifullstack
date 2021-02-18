@@ -20,6 +20,7 @@ export type Query = {
   bye: Scalars['String'];
   users: Array<User>;
   me?: Maybe<User>;
+  techniques: Array<Technique>;
 };
 
 export type User = {
@@ -28,12 +29,21 @@ export type User = {
   email: Scalars['String'];
 };
 
+export type Technique = {
+  __typename?: 'Technique';
+  id: Scalars['Int'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  image: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   logout: Scalars['Boolean'];
   revokeRefreshTokenForUser: Scalars['Boolean'];
   login: LoginResponse;
   register: Scalars['Boolean'];
+  makeTech: Scalars['Boolean'];
 };
 
 
@@ -51,6 +61,13 @@ export type MutationLoginArgs = {
 export type MutationRegisterArgs = {
   password: Scalars['String'];
   email: Scalars['String'];
+};
+
+
+export type MutationMakeTechArgs = {
+  image: Scalars['String'];
+  description: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type LoginResponse = {
@@ -121,6 +138,17 @@ export type RegisterMutationVariables = Exact<{
 export type RegisterMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'register'>
+);
+
+export type GetTechQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTechQuery = (
+  { __typename?: 'Query' }
+  & { techniques: Array<(
+    { __typename?: 'Technique' }
+    & Pick<Technique, 'title' | 'id' | 'description' | 'image'>
+  )> }
 );
 
 export type TestingQueryVariables = Exact<{ [key: string]: never; }>;
@@ -333,6 +361,41 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const GetTechDocument = gql`
+    query getTech {
+  techniques {
+    title
+    id
+    description
+    image
+  }
+}
+    `;
+
+/**
+ * __useGetTechQuery__
+ *
+ * To run a query within a React component, call `useGetTechQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTechQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTechQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTechQuery(baseOptions?: Apollo.QueryHookOptions<GetTechQuery, GetTechQueryVariables>) {
+        return Apollo.useQuery<GetTechQuery, GetTechQueryVariables>(GetTechDocument, baseOptions);
+      }
+export function useGetTechLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTechQuery, GetTechQueryVariables>) {
+          return Apollo.useLazyQuery<GetTechQuery, GetTechQueryVariables>(GetTechDocument, baseOptions);
+        }
+export type GetTechQueryHookResult = ReturnType<typeof useGetTechQuery>;
+export type GetTechLazyQueryHookResult = ReturnType<typeof useGetTechLazyQuery>;
+export type GetTechQueryResult = Apollo.QueryResult<GetTechQuery, GetTechQueryVariables>;
 export const TestingDocument = gql`
     query Testing {
   testing

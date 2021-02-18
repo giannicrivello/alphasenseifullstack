@@ -1,0 +1,11 @@
+.tech-nav {
+    background: black;
+    display: flex;
+    justify-content: space-around;
+
+    
+}
+.tech-nav-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
