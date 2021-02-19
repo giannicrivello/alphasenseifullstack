@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Routes from '../Routes';
 import { accessToken, setAcessToken } from './accessToken';
 import { Login } from './Login';
+import { Register } from './Register';
 
 interface Props {
 
@@ -31,8 +32,13 @@ export const App: React.FC<Props> = () => {
         return(
          <div>
              <BrowserRouter>
-                <Redirect to='/login' />
-                <Route exact path='/login' component={Login} />
+                    <Redirect to='/register' />
+                    <Switch>
+                    <Route exact path='/register' component={Register}/>
+                    <Route exact path='/login' component={Login}/>
+
+                    </Switch>
+
              </BrowserRouter>
         </div>
         )
@@ -41,3 +47,8 @@ export const App: React.FC<Props> = () => {
            <Routes />
         );
 } 
+
+{/* <BrowserRouter>
+<Redirect to='/register' />
+<Route exact path='/register' component={Register} />
+</BrowserRouter> */}

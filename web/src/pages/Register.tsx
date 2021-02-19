@@ -1,12 +1,18 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import { useRegisterMutation } from '../generated/graphql';
-import { RouteChildrenProps, RouteComponentProps } from 'react-router-dom'; //this allows us to use history for the redirect to home
+import { BrowserRouter, Link, RouteChildrenProps, RouteComponentProps } from 'react-router-dom'; //this allows us to use history for the redirect to home
 
 export const Register: React.FC<RouteComponentProps> = ({history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [register] = useRegisterMutation();
+
+    function refresh() {
+      history.push('/login')
+      // window.location.reload();
+  }
+  
 
 
     return (
@@ -20,7 +26,7 @@ export const Register: React.FC<RouteComponentProps> = ({history}) => {
                     }
                 });
                 console.log(response)
-                history.push('/technav')
+                
         }}>
           <Form.Field>
             <label>First Name</label>
@@ -38,6 +44,12 @@ export const Register: React.FC<RouteComponentProps> = ({history}) => {
             <Checkbox label='I agree to the Terms and Conditions' />
           </Form.Field>
           <Button type='submit'>Register</Button>
+          <BrowserRouter>
+          <Link to='/login'>
+            <Button onClick={refresh}>Already a Member? Login</Button>
+          </Link>
+          </BrowserRouter>
+          
         </Form>
       )
 
